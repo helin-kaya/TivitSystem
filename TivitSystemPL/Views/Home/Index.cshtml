@@ -1,0 +1,47 @@
+﻿@model List<SendTivitViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutTivitSystem.cshtml";
+}
+@*@section tivitstyle{
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
+}*@
+<div class="col-12">
+
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            
+            <div class="col-2">
+                <img src="~/profilepicture.jpg" style="width:50px; height:50px;" />
+            </div>
+            @{
+                var span = new TimeSpan();
+                span = DateTime.Now - item.InsertedDate;
+            }
+            <div class="col-8">
+                <label>
+                    @item.AppUser.Name @item.AppUser.Surname @Html.Raw("@")<span style="font-style:italic"> @item.AppUser.UserName</span>
+                    <span style="font-weight:bold"> @Math.Round(span.TotalHours) sa</span>
+                </label>
+                <textarea class="form-control" readonly>@item.TivitDetail</textarea>
+                <br>
+                @foreach (var media in item.TivitMedias)
+                {
+                    <div class="col-2">
+                        <img src="@media.MediaPath" style="width:150px; height:150px;" />
+                    </div>
+                }
+				</div>
+			
+        </div>
+    }
+
+</div>
